@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: smartjkpdf
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: STORAGE_DIR
+        value: /app/converted-files
+      - key: JAVA_OPTS
+        value: -Xmx450m -Xms200m
+    disk:
+      name: smartjkpdf-storage
+      mountPath: /app/converted-files
+      sizeGB: 1
